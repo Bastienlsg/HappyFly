@@ -3,6 +3,7 @@ package com.project.happy_fly.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="user")
@@ -29,12 +30,14 @@ public class User {
     private String email;
 
     @Basic
-    @Column(name="password", length=250, nullable=false)
+    @Column(name="password", nullable=false)
     private String password;
 
-    @Basic
     @Column(name="is_admin", columnDefinition = "bit(1) default 0")
     private boolean isAdmin = false;
+
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL, orphanRemoval=true)
+    Set<Reservation> reservation;
 
     public String getHandle() {
         return handle;
@@ -91,4 +94,5 @@ public class User {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
+
 }
