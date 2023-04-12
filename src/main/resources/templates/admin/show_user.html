@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+      <meta charset="UTF-8">
+      <title>Title</title>
+  </head>
+  <body>
+      <h1>Informations sur <span th:text="${user.handle}"></span></h1>
+      <p>Pseudo : <span th:text="${user.handle}"></span></p>
+      <p>Nom : <span th:text="${user.name}"></span></p>
+      <p>Prénom : <span th:text="${user.firstName}"></span></p>
+      <p>Date de naissance : <span th:text="${user.birthDate}"></span></p>
+      <p>Email : <span th:text="${user.email}"></span></p>
+      <p>Mot de passe : <span th:text="${user.password}"></span></p>
+      <p>Administrateur : <span th:text="${user.admin} ? 'Oui' : 'Non'"></span></p>
+  </body>
+</html>

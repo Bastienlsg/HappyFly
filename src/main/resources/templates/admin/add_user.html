@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Ajouter un utilisateur</title>
+    <meta charset="UTF-8">
+  </head>
+
+  <body>
+    <h1>Ajouter un utilisateur</h1>
+
+    <form method="post">
+
+      <label for="handle">Pseudo:</label>
+      <input type="text" id="handle" name="handle" required="required"/>
+
+      <label for="name">Nom:</label>
+      <input type="text" id="name" name="name"/>
+
+      <label for="firstName">Prénom:</label>
+      <input type="text" id="firstName" name="firstName"/>
+
+      <label for="birthDate">Date de naissance:</label>
+      <input type="date" id="birthDate" name="birthDate"/>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required="required"/>
+
+      <label for="password">Mot de passe:</label>
+      <input type="password" id="password" name="password" required="required"/>
+
+      <label for="isAdmin">Administrateur:</label>
+      <input type="checkbox" id="isAdmin" name="isAdmin"/>
+
+      <button type="submit">Ajouter</button>
+    </form>
+  </body>
+</html>

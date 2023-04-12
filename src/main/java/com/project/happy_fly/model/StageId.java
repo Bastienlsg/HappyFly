@@ -12,9 +12,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-class ReservationId implements Serializable {
-    @Column(name="user_handle")
-    private String userHandle;
+class StageId implements Serializable {
+    @Column(name="place_id")
+    private int placeId;
 
     @Column(name="circuit_name")
     private String circuitName;
