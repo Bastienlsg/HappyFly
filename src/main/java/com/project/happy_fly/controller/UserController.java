@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @GetMapping("/utilisateur/ajout")
-    public String showAddUserForm(Model model) {
+    public String addUserForm(Model model) {
         model.addAttribute("user", new User());
         return "admin/add_user";
     }

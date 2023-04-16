@@ -14,12 +14,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User createUser(User user) {
+    public void createUser(User user) {
         Optional<User> existingUser = userRepository.findById(user.getHandle());
         if(existingUser.isPresent()) {
             throw new IllegalArgumentException("Un utilisateur avec ce pseudo existe déjà.");
         }
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public Optional<User> getUser(final String id) {
