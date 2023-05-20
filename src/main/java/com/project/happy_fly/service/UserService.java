@@ -14,6 +14,14 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public Iterable<User> getUsers() {
+        return userRepository.findAll();
+    }
+
+    public Optional<User> getUser(final String id) {
+        return userRepository.findById(id);
+    }
+
     public void createUser(User user) {
         Optional<User> existingUser = userRepository.findById(user.getHandle());
         if(existingUser.isPresent()) {
@@ -22,19 +30,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public Optional<User> getUser(final String id) {
-        return userRepository.findById(id);
-    }
-
-    public Iterable<User> getUsers() {
-        return userRepository.findAll();
-    }
-
-    public User removeUser(final String handle) {
-        User user = userRepository.findById(handle).orElse(null);
-        if(user != null){
-            userRepository.deleteById(handle);
-        }
-        return user;
+    public void removeUser(final String handle) {
+        userRepository.findById(handle).ifPresent(user -> userRepository.deleteById(handle));
     }
 }

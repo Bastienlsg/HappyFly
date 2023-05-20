@@ -19,13 +19,10 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("")
-    public String showAdminPage() {
-        return "admin/index";
-    }
-
-    @GetMapping("/utilisateurs")
-    public Iterable<User> getUsers() {
-        return userService.getUsers();
+    public String getUsers(Model model) {
+        Iterable<User> users = userService.getUsers();
+        model.addAttribute("users", users);
+        return "admin/show_users";
     }
 
     @GetMapping("/utilisateur/{handle}")
@@ -36,7 +33,7 @@ public class UserController {
             model.addAttribute("user", user);
             return "admin/show_user";
         } else {
-            return "admin/index";
+            return "admin/show_users";
         }
     }
 
@@ -51,16 +48,17 @@ public class UserController {
         if (result.hasErrors()) {
             return "admin/add_user";
         }
+        if (userService.getUser(user.getHandle()).isPresent()) {
+            result.rejectValue("handle", "error.user", "Cet utilisateur existe déjà");
+            return "admin/add_user";
+        }
         userService.createUser(user);
         return "redirect:" + user.getHandle();
     }
 
-    @DeleteMapping("/utilisateur/{handle}/suppression")
-    public ResponseEntity<User> removeUser(@PathVariable String handle) {
-        User removedUser = userService.removeUser(handle);
-        if(removedUser == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(removedUser);
+    @RequestMapping("/utilisateur/{handle}/suppression")
+    public String removeUser(@PathVariable String handle) {
+        userService.removeUser(handle);
+        return "redirect:/admin";
     }
 }

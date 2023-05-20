@@ -3,13 +3,14 @@ package com.project.happy_fly.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(exclude="country")
 @Entity
 @Table(name="city")
 public class City {
@@ -24,10 +25,4 @@ public class City {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="country_name")
     private Country country;
-
-    @OneToMany(mappedBy="departureCity", fetch=FetchType.LAZY)
-    private Set<Circuit> departureCity;
-
-    @OneToMany(mappedBy="arrivalCity", fetch=FetchType.LAZY)
-    private Set<Circuit> arrivalCity;
 }

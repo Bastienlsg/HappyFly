@@ -21,7 +21,7 @@ import java.util.Set;
 public class User {
     @Id
     @Column(name="user_handle", length=50, nullable=false)
-    @NotBlank(message = "Le champ pseudo ne peut pas être vide")
+    @NotBlank(message = "Le pseudo ne peut pas être vide")
     private String handle;
 
     @Column(length=100)
@@ -36,14 +36,15 @@ public class User {
     private LocalDate birthDate;
 
     @Column(length=320, nullable=false)
-    @NotBlank(message = "Le champ email ne peut pas être vide")
-    @Email(message = "Le champ email doit être une adresse e-mail valide")
+    @NotBlank(message = "L'email ne peut pas être vide")
+    @Email(message = "Le champ doit avoir une adresse mail valide")
     private String email;
 
     @Column(nullable=false)
-    @NotBlank(message = "Le champ mot de passe ne peut pas être vide")
-    @Size(min = 10, message = "Ce champ doit avoir au moins 10 caractères")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", message = "Il doit contenir au moins une minuscule, une majuscule et un caractère spécial")
+    @NotBlank(message = "Le mot de passe ne peut pas être vide")
+    @Size(min = 10, message = "Le mot de passe doit avoir au moins 10 caractères")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", message = "Le mot de passe doit contenir au " +
+            "moins une minuscule, une majuscule et un caractère spécial")
     private String password;
 
     @Column(name="is_admin", columnDefinition="bit(1) default 0")

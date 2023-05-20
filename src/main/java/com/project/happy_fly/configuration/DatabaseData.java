@@ -1,21 +1,29 @@
 package com.project.happy_fly.configuration;
 
-import com.project.happy_fly.model.User;
 import com.project.happy_fly.repository.UserRepository;
+import com.project.happy_fly.repository.CountryRepository;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 
-import java.time.LocalDate;
-import java.time.Month;
-
 public class DatabaseData {
+    private final UserRepository userRepository;
+    private final CountryRepository countryRepository;
+
+
+    public DatabaseData(UserRepository userRepository, CountryRepository countryRepository) {
+        this.userRepository = userRepository;
+        this.countryRepository = countryRepository;
+    }
+
     @Bean
-    public CommandLineRunner initData(UserRepository userRepository) {
+    public CommandLineRunner initData() {
         return args -> {
-            User user = new User("utilisateur", "Liza", "Beaudoin", LocalDate.of(1983, Month.JUNE, 13), "utlisateur@gmail.com", "Utilisateur@", false, null);
-            User userAdmin = new User("admin", "Alexis", "Clavette", LocalDate.of(1950, Month.SEPTEMBER, 29), "admin@gmail.com", "Administrateur@", true, null);
-            userRepository.save(user);
-            userRepository.save(userAdmin);
+            UserInitializer userInitializer = new UserInitializer(this.userRepository);
+            userInitializer.initializeUsers();
+
+            CityCountryInitializer countriesCitiesInitializer = new CityCountryInitializer(this.countryRepository);
+            countriesCitiesInitializer.initializeCountriesCities();
         };
     }
 }
